@@ -5,6 +5,7 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         SerialPort puertoArduino;
+        SerialPort puertoBt;
         public Form1()
         {
             InitializeComponent();
@@ -16,8 +17,13 @@ namespace WinFormsApp1
             foreach (string nombrePuerto in SerialPort.GetPortNames())
             {
                 puertos.Items.Add(nombrePuerto);
+                puertosBt.Items.Add(nombrePuerto);
             }
-            if (puertos.Items.Count > 0) { this.puertos.SelectedIndex = 0; }
+            if (puertos.Items.Count > 0)
+            {
+                this.puertos.SelectedIndex = 0;
+                this.puertosBt.SelectedIndex = 0;
+            }
 
         }
 
@@ -64,5 +70,53 @@ namespace WinFormsApp1
             this.puertoArduino.WriteLine("OFF");
             return;
         }
+
+        void mostrarMensaje(string mensaje)
+        {
+            testdatos.Text = (mensaje);
+        }
+
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            String comando;
+            comando = puertoBt.ReadLine();
+            this.Invoke(this.mostrarMensaje, comando);
+            puertoArduino.WriteLine(comando);
+        }
+        private void AbrirPuertoBlueTooth()
+        {
+            string puerto = this.puertosBt.Text; //COM
+            this.puertoBt = new SerialPort(puerto);
+
+            //Config puerto Arduino
+            puertoBt.BaudRate = 9600;
+            puertoBt.Parity = Parity.None;
+            puertoBt.StopBits = StopBits.One;
+            puertoBt.DataBits = 8;
+            puertoBt.Handshake = Handshake.None;
+            puertoBt.RtsEnable = false;
+            puertoBt.ReadTimeout = 10000; //ms
+
+            puertoBt.DataReceived += DataReceivedHandler; //vinculamos el evento de llegada de datos al puerto BT
+
+
+            try
+            {
+                this.puertoBt.Open();
+            }
+            catch
+            {
+                this.estadoPuertoBt.Text = "Error al abrir el puerto " + puerto;
+                return;
+            }
+            this.estadoPuertoBt.Text = $"Puerto {puerto} abierto correctamente.";
+
+        }
+
+        private void buttonBt_Click(object sender, EventArgs e)
+        {
+            this.AbrirPuertoBlueTooth();
+        }
     }
+
 }

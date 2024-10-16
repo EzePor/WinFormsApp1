@@ -35,6 +35,11 @@
             activarSemaforo = new Button();
             btnCerrar = new Button();
             button1 = new Button();
+            label3 = new Label();
+            puertosBt = new ComboBox();
+            buttonBt = new Button();
+            estadoPuertoBt = new Label();
+            testdatos = new Label();
             SuspendLayout();
             // 
             // puertos
@@ -69,7 +74,7 @@
             // 
             // estadoPuerto
             // 
-            estadoPuerto.Location = new Point(273, 110);
+            estadoPuerto.Location = new Point(267, 80);
             estadoPuerto.Name = "estadoPuerto";
             estadoPuerto.Size = new Size(245, 36);
             estadoPuerto.TabIndex = 3;
@@ -109,11 +114,60 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(153, 229);
+            label3.Name = "label3";
+            label3.Size = new Size(153, 20);
+            label3.TabIndex = 9;
+            label3.Text = "Seleccionar puerto BT";
+            // 
+            // puertosBt
+            // 
+            puertosBt.DropDownStyle = ComboBoxStyle.DropDownList;
+            puertosBt.FlatStyle = FlatStyle.Flat;
+            puertosBt.FormattingEnabled = true;
+            puertosBt.Location = new Point(306, 221);
+            puertosBt.Name = "puertosBt";
+            puertosBt.Size = new Size(251, 28);
+            puertosBt.TabIndex = 8;
+            // 
+            // buttonBt
+            // 
+            buttonBt.BackColor = Color.Lime;
+            buttonBt.Location = new Point(588, 220);
+            buttonBt.Name = "buttonBt";
+            buttonBt.Size = new Size(147, 29);
+            buttonBt.TabIndex = 10;
+            buttonBt.Text = "Abrir puertoBT";
+            buttonBt.UseVisualStyleBackColor = false;
+            buttonBt.Click += buttonBt_Click;
+            // 
+            // estadoPuertoBt
+            // 
+            estadoPuertoBt.Location = new Point(306, 252);
+            estadoPuertoBt.Name = "estadoPuertoBt";
+            estadoPuertoBt.Size = new Size(251, 40);
+            estadoPuertoBt.TabIndex = 11;
+            // 
+            // testdatos
+            // 
+            testdatos.Location = new Point(306, 325);
+            testdatos.Name = "testdatos";
+            testdatos.Size = new Size(251, 40);
+            testdatos.TabIndex = 12;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(937, 459);
+            Controls.Add(testdatos);
+            Controls.Add(estadoPuertoBt);
+            Controls.Add(buttonBt);
+            Controls.Add(label3);
+            Controls.Add(puertosBt);
             Controls.Add(button1);
             Controls.Add(btnCerrar);
             Controls.Add(activarSemaforo);
@@ -137,5 +191,10 @@
         private Button activarSemaforo;
         private Button btnCerrar;
         private Button button1;
+        private Label label3;
+        private ComboBox puertosBt;
+        private Button buttonBt;
+        private Label estadoPuertoBt;
+        private Label testdatos;
     }
 }
